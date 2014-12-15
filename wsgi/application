@@ -7,34 +7,34 @@
 #
 # For generic wsgi handlers a global application is defined.
 # For uwsgi this should work:
-#   $ uwsgi_python --http :9090 --pythonpath . --wsgi-file openerp-wsgi.py
+#   $ uwsgi_python --http :9090 --pythonpath . --wsgi-file ODOO-wsgi.py
 #
 # For gunicorn additional globals need to be defined in the Gunicorn section.
 # Then the following command should run:
-#   $ gunicorn openerp:service.wsgi_server.application -c openerp-wsgi.py
+#   $ gunicorn ODOO:service.wsgi_server.application -c ODOO-wsgi.py
 
 import os
 import sys
 
-OPENERP_ROOT_DIR = os.path.join(os.environ.get('OPENSHIFT_REPO_DIR', '.'), 'wsgi/openerp')
-if OPENERP_ROOT_DIR not in sys.path:
-    sys.path.append(OPENERP_ROOT_DIR)
+ODOO_ROOT_DIR = os.path.join(os.environ.get('OPENSHIFT_REPO_DIR', '.'), 'wsgi/ODOO')
+if ODOO_ROOT_DIR not in sys.path:
+    sys.path.append(ODOO_ROOT_DIR)
 
-import openerp
+import ODOO
 
 #----------------------------------------------------------
 # Common
 #----------------------------------------------------------
-openerp.multi_process = True # Nah!
+ODOO.multi_process = True # Nah!
 
 # Equivalent of --load command-line option
-openerp.conf.server_wide_modules = ['web']
-conf = openerp.tools.config
+ODOO.conf.server_wide_modules = ['web']
+conf = ODOO.tools.config
 
-# Path to the OpenERP Addons repository (comma-separated for
+# Path to the ODOO Addons repository (comma-separated for
 # multiple locations)
 
-conf['addons_path'] = os.path.join(OPENERP_ROOT_DIR, 'openerp/addons')
+conf['addons_path'] = os.path.join(ODOO_ROOT_DIR, 'ODOO/addons')
 
 # Optional database config if not using local socket
 conf['db_host']     = os.environ['OPENSHIFT_POSTGRESQL_DB_HOST']
@@ -46,12 +46,12 @@ conf['db_password'] = os.environ['OPENSHIFT_POSTGRESQL_DB_PASSWORD']
 #----------------------------------------------------------
 # Generic WSGI handlers application
 #----------------------------------------------------------
-application = openerp.service.wsgi_server.application
+application = ODOO.service.wsgi_server.application
 
 #----------------------------------------------------------
 # Gunicorn
 #----------------------------------------------------------
-# Standard OpenERP XML-RPC port is 8069
+# Standard ODOO XML-RPC port is 8069
 #bind = '127.0.0.1:8069'
 #pidfile = '.gunicorn.pid'
 #workers = 4
