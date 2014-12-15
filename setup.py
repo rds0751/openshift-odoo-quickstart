@@ -1,9 +1,9 @@
 from setuptools import setup
 
-setup(name='OpenERP',
-      version='7.0',
-      description='OpenERP on OpenShift',
-      author='Mateus Caruccio',
-      author_email='mateus.caruccio@getupcloud.com',
-      url='https://github.com/caruccio/openshift-openerp-quickstart',
+setup(name='Odoo',
+      version='8.0',
+      description='Odoo on OpenShift',
+      author='Juan Ramón alfaro',
+      author_email='amon.raj@gmail.com',
+      url='https://github.com/amon-ra/openshift-odoo-quickstart',
 )

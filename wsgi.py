@@ -1,40 +1,39 @@
-#!/usr/bin/env python
-# WSGI Handler sample configuration file.
-#
-# Change the appropriate settings below, in order to provide the parameters
-# that would normally be passed in the command-line.
-# (at least conf['addons_path'])
-#
-# For generic wsgi handlers a global application is defined.
-# For uwsgi this should work:
-#   $ uwsgi_python --http :9090 --pythonpath . --wsgi-file ODOO-wsgi.py
-#
-# For gunicorn additional globals need to be defined in the Gunicorn section.
-# Then the following command should run:
-#   $ gunicorn ODOO:service.wsgi_server.application -c ODOO-wsgi.py
-
+#!/usr/bin/python
 import os
+
+virtenv = os.environ['OPENSHIFT_PYTHON_DIR'] + '/virtenv/'
+virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
+try:
+    execfile(virtualenv, dict(__file__=virtualenv))
+except IOError:
+    pass
+#
+# IMPORTANT: Put any additional includes below this line.  If placed above this
+# line, it's possible required libraries won't be in your searchable path
+#
+
+
 import sys
 
-ODOO_ROOT_DIR = os.path.join(os.environ.get('OPENSHIFT_REPO_DIR', '.'), 'wsgi/ODOO')
+ODOO_ROOT_DIR = os.path.join(os.environ.get('OPENSHIFT_REPO_DIR', '.'), 'odoo')
 if ODOO_ROOT_DIR not in sys.path:
     sys.path.append(ODOO_ROOT_DIR)
 
-import ODOO
+import openerp
 
 #----------------------------------------------------------
 # Common
 #----------------------------------------------------------
-ODOO.multi_process = True # Nah!
+odoo.multi_process = True # Nah!
 
 # Equivalent of --load command-line option
-ODOO.conf.server_wide_modules = ['web']
-conf = ODOO.tools.config
+odoo.conf.server_wide_modules = ['web']
+conf = odoo.tools.config
 
 # Path to the ODOO Addons repository (comma-separated for
 # multiple locations)
 
-conf['addons_path'] = os.path.join(ODOO_ROOT_DIR, 'ODOO/addons')
+conf['addons_path'] = os.path.join(ODOO_ROOT_DIR, 'openerp/addons')
 
 # Optional database config if not using local socket
 conf['db_host']     = os.environ['OPENSHIFT_POSTGRESQL_DB_HOST']
@@ -46,7 +45,7 @@ conf['db_password'] = os.environ['OPENSHIFT_POSTGRESQL_DB_PASSWORD']
 #----------------------------------------------------------
 # Generic WSGI handlers application
 #----------------------------------------------------------
-application = ODOO.service.wsgi_server.application
+application = openerp.service.wsgi_server.application
 
 #----------------------------------------------------------
 # Gunicorn

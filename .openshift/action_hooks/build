@@ -2,19 +2,19 @@
 
 ODOO_VERSION=8.0
 ODOO_TIMESTAMP=20140517-231234
-ODOO_URL=http://nightly.odoo.com/$ODOO_VERSION/nightly/src/odoo-${ODOO_VERSION}-${ODOO_TIMESTAMP}.tar.gz
+ODOO_URL=https://github.com/odoo/odoo/archive/$ODOO_VERSION.zip
 
 cd $OPENSHIFT_DATA_DIR/
 
-if [ -d "odoo-${ODOO_VERSION}-${ODOO_TIMESTAMP}" ]; then
-	echo "OpenERP already downloaded."
+if [ -d "odoo-${ODOO_VERSION}" ]; then
+	echo "Odoo already downloaded."
 	exit 0
 fi
 
-echo "OpenERP will be downloaded now."
+echo "Odoo will be downloaded now."
 wget $ODOO_URL
 
-tar xzf odoo-${ODOO_VERSION}-${ODOO_TIMESTAMP}.tar.gz
+unzip odoo-${ODOO_VERSION}.zip
 
-cd $OPENSHIFT_REPO_DIR/wsgi/
-ln -s $OPENSHIFT_DATA_DIR/odoo-${ODOO_VERSION}-${ODOO_TIMESTAMP} odoo
+ln -s $OPENSHIFT_DATA_DIR/odoo-${ODOO_VERSION}/requirements.txt $OPENSHIFT_DATA_DIR/requirements.txt
+
