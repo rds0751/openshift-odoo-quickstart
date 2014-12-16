@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='Odoo',
-      version='8.0',
+      version='trunk',
       description='Odoo on OpenShift',
       author='Juan Ramón alfaro',
       author_email='amon.raj@gmail.com',

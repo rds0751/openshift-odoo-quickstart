@@ -1,5 +1,5 @@
 #!/bin/bash
-ODOO_VERSION=8.0
+ODOO_VERSION=master
 ODOO_TIMESTAMP=20140517-231234
 ODOO_URL=https://github.com/odoo/odoo/archive/$ODOO_VERSION.zip
 
