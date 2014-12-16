@@ -48,7 +48,7 @@ conf['db_user']     = os.environ['OPENSHIFT_POSTGRESQL_DB_USERNAME']
 conf['db_name']     = os.environ['OPENSHIFT_APP_NAME']
 conf['db_password'] = os.environ['OPENSHIFT_POSTGRESQL_DB_PASSWORD']
 
-conf['logfile'] = os.path.join($OPENSHIFT_LOG_DIR , 'odoo.log')
+conf['logfile'] = os.path.join(os.environ.get('OPENSHIFT_LOG_DIR', '.') , 'odoo.log')
 
 #----------------------------------------------------------
 # Generic WSGI handlers application

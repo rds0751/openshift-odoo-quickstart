@@ -4,20 +4,21 @@ ODOO_VERSION=8.0
 ODOO_TIMESTAMP=20140517-231234
 ODOO_URL=https://github.com/odoo/odoo/archive/$ODOO_VERSION.zip
 
-
-cd $OPENSHIFT_DATA_DIR/
+cp ${OPENSHIFT_REPO_DIR}/wkhtmltopdf/wkhtmltopdf ${OPENSHIFT_PYTHON_DIR}/virtenv/bin
+cp ${OPENSHIFT_REPO_DIR}/wkhtmltopdf/lib/* ${OPENSHIFT_PYTHON_DIR}/virtenv/bin
+cd $OPENSHIFT_DATA_DIR
 
 #if [ -d "odoo-${ODOO_VERSION}" ]; then
 #	echo "Odoo already downloaded."
 #	exit 0
 #fi
 
-if [ ! -f "$OPENSHIFT_DATA_DIR/odoo-${ODOO_VERSION}.zip" ]; then
+if [ ! -f "$OPENSHIFT_DATA_DIR/odoo-${ODOO_VERSION}-${ODOO_TIMESTAMP}.zip" ]; then
   echo "Odoo will be downloaded now."
-  rm -f $OPENSHIFT_DATA_DIR/odoo-${ODOO_VERSION}.zip
-  wget $ODOO_URL -O $OPENSHIFT_DATA_DIR/odoo-${ODOO_VERSION}.zip
+  #rm -f $OPENSHIFT_DATA_DIR/odoo-${ODOO_VERSION}-${ODOO_TIMESTAMP}.zip
+  wget $ODOO_URL -O $OPENSHIFT_DATA_DIR/odoo-${ODOO_VERSION}-${ODOO_TIMESTAMP}.zip
 
-  unzip -o $OPENSHIFT_DATA_DIR/odoo-${ODOO_VERSION}.zip
+  unzip -o $OPENSHIFT_DATA_DIR/odoo-${ODOO_VERSION}-${ODOO_TIMESTAMP}.zip
 
   rm -f $OPENSHIFT_DATA_DIR/odoo
   ln -s $OPENSHIFT_DATA_DIR/odoo-${ODOO_VERSION} $OPENSHIFT_DATA_DIR/odoo
@@ -27,11 +28,11 @@ if [ ! -f "$OPENSHIFT_DATA_DIR/odoo-${ODOO_VERSION}.zip" ]; then
 
   source $OPENSHIFT_PYTHON_DIR/virtenv/bin/activate
   #pip install -r $OPENSHIFT_REPO_DIR/requirements.txt
-
+  
   cd $OPENSHIFT_DATA_DIR/odoo
+  sed -i '/python-ldap/d' setup.py
   python setup.py develop
 fi
-
 #export XDG_DATA_HOME = $OPENSHIFT_DATA_DIR/.local/share
 #export XDG_CACHE_HOME = $OPENSHIFT_DATA_DIR/.cache
 #export XDG_CONFIG_HOME = $OPENSHIFT_DATA_DIR/.config

@@ -3,12 +3,12 @@ ODOO_VERSION=8.0
 ODOO_TIMESTAMP=20140517-231234
 ODOO_URL=https://github.com/odoo/odoo/archive/$ODOO_VERSION.zip
 
-source $OPENSHIFT_PYTHON_DIR/virtenv/bin/activate
+source ${OPENSHIFT_PYTHON_DIR}/virtenv/bin/activate
 pip install -r $OPENSHIFT_REPO_DIR/requirements.txt
 
-export XDG_DATA_HOME = $OPENSHIFT_DATA_DIR/.local/share
-export XDG_CACHE_HOME = $OPENSHIFT_DATA_DIR/.cache
-export XDG_CONFIG_HOME = $OPENSHIFT_DATA_DIR/.config
+#export XDG_DATA_HOME = $OPENSHIFT_DATA_DIR/.local/share
+#export XDG_CACHE_HOME = $OPENSHIFT_DATA_DIR/.cache
+#export XDG_CONFIG_HOME = $OPENSHIFT_DATA_DIR/.config
 
 cd $OPENSHIFT_DATA_DIR/odoo
 XDG_DATA_HOME="$OPENSHIFT_DATA_DIR/.local/share" ./openerp-server --update=all --stop-after-init -d $OPENSHIFT_APP_NAME -r $OPENSHIFT_POSTGRESQL_DB_USERNAME -w $OPENSHIFT_POSTGRESQL_DB_PASSWORD --db_host=$OPENSHIFT_POSTGRESQL_DB_HOST --db_port=$OPENSHIFT_POSTGRESQL_DB_PORT --addons-path="$OPENSHIFT_REPO_DIR/addons,$OPENSHIFT_DATA_DIR/odoo/addons,$OPENSHIFT_DATA_DIR/odoo/openerp/addons"
