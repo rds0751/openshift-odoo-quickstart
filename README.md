@@ -21,6 +21,16 @@ $ git push
 
 That's it!
 
+Now put your own modules in addons dir and do another 
+```
+git push
+```
+
+Now put your own modules in addons dir and do another 
+```
+git push
+```
+
 Point your browser to [https://openerp-$namespace.rhcloud.com](https://openerp-$namespace.rhcloud.com) and login.
 Default credentials are:
 
