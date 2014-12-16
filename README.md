@@ -2,8 +2,6 @@
 
 This quickstart contains an OpenERP installation ready to run on OpenShift.
 
-If you don't have an account yet, go to http://getupcloud.com and register for a free trial.
-
 ## Create your app
 
 First, create an application with PostgreSQL:
@@ -23,7 +21,7 @@ $ git push
 
 That's it!
 
-Point your browser to [https://openerp-$namespace.getup.io](https://openerp-$namespace.getup.io) and login.
+Point your browser to [https://openerp-$namespace.rhcloud.com](https://openerp-$namespace.rhcloud.com) and login.
 Default credentials are:
 
 ```
