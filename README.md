@@ -15,21 +15,20 @@ Then, merge and push this repo into your new app. Please be patient, this operat
 ```
 $ cd openerp/
 $ git remote add upstream https://github.com/amon-ra/openshift-odoo-quickstart.git
-$ git pull -s recursive -X theirs upstream 8.0
+$ git pull -s recursive -X theirs upstream dev
+$ git clone https://github.com/odoo/odoo
+$ git add odoo
 $ git push
 ```
 
 That's it!
 
-Now put your own modules in addons dir and do another 
+Now put your own modules in addons dir or modify odoo source and do another 
 ```
+git add .
 git push
 ```
 
-Now put your own modules in addons dir and do another 
-```
-git push
-```
 
 Point your browser to [https://openerp-$namespace.rhcloud.com](https://openerp-$namespace.rhcloud.com) and login.
 Default credentials are:

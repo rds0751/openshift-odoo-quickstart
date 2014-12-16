@@ -15,7 +15,7 @@ except IOError:
 
 import sys
 
-ODOO_ROOT_DIR = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR', '.'), 'odoo')
+ODOO_ROOT_DIR = os.path.join(os.environ.get('OPENSHIFT_REPO_DIR', '.'), 'odoo')
 if ODOO_ROOT_DIR not in sys.path:
     sys.path.append(ODOO_ROOT_DIR)
 
