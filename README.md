@@ -1,35 +1,45 @@
 # OpenShift OpenERP quickstart
 
-This quickstart contains an OpenERP installation ready to run on OpenShift.
+Este quickstart contém uma instalação do OpenERP pronta para rodar no OpenShift.
 
-## Create your app
+Se você ainda não tem uma conta na Getup, vá em http://getupcloud.com e registre-se gratuitamente.
 
-First, create an application with PostgreSQL:
+## Crie seu app
+
+Primeiro, crie uma aplicação Python com PostgreSQL:
 
 ```
 $ rhc app create openerp python-2.7 postgresql-9
 ```
 
-Then, merge and push this repo into your new app. Please be patient, this operation may last for a long time.
+Depois, faça o merge e o push deste repo para sua aplicação.
 
 ```
 $ cd openerp/
-$ git remote add upstream https://github.com/amon-ra/openshift-odoo-quickstart.git
-$ git pull -s recursive -X theirs upstream 8.0
+$ git remote add upstream https://github.com/caruccio/openshift-openerp-quickstart.git
+$ git pull -s recursive -X theirs upstream master
 $ git push
 ```
 
-That's it!
+Pronto!
 
-Point your browser to [https://openerp-$namespace.rhcloud.com](https://openerp-$namespace.rhcloud.com) and login.
-Default credentials are:
+Aponte seu browser para [https://openerp-$namespace.getup.io](https://openerp-$namespace.getup.io) e faça login.
+As credentials padrão são:
 
 ```
 Username: admin
 Password: admin
 ```
 
-## Upgrade
+## Atualização
 
-To use master version pull master on previus commands.
+Este quickstart utiliza um build noturno do OpenERP, a partir do arquivo http://nightly.openerp.com/7.0/nightly/src/openerp-7.0-20140517-231234.tar.gz
 
+Para utilizar outra versão do openerp, edite o arquivo `.openshift/action_hooks/build`, atualizando as variaveis OPENERP_VERSION e OPENERP_TIMESTAMP para os valores desejados.
+Em seguida faça o deploy.
+
+```
+$ vim .openshift/action_hooks/build
+$ git commit -a -m "Upgrade to version XXX"
+$ git push
+```

@@ -39,4 +39,4 @@ vatnumber==1.2
 vobject==0.6.6
 wsgiref==0.1.2
 xlwt==0.7.5
-
+http://pkgs.fedoraproject.org/repo/pkgs/python-ldap/python-ldap-2.4.6.tar.gz/0407757f2b6923dbe1f700c683e9e474/python-ldap-2.4.6.tar.gz
